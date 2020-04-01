@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Андрей Калашников](https://up.htmlacademy.ru/ecmascript/11/user/149774).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Рыжаков](https://up.htmlacademy.ru/ecmascript/11/user/201015).
 
 ---
 
