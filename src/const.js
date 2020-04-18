@@ -58,10 +58,10 @@ export const ACTORS = [
 ];
 
 export const EMOJI = [
-  'angry.png',
-  'puke.png',
-  'sleeping.png',
-  'smile.png',
+  `angry.png`,
+  `puke.png`,
+  `sleeping.png`,
+  `smile.png`,
 ];
 
 export const DESCRIPTIONS = [
