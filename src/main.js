@@ -5,7 +5,9 @@ import {createFooterStatsTemplate} from "./components/footer-stats";
 import {createHeaderProfileTemplate} from "./components/header-profile";
 import {createLoadMoreButtonTemplate} from "./components/load-more-button";
 import {createMenuTemplate} from "./components/menu";
+import {generateFilms} from "./mock/film.js";
 
+const FILMS_COUNT = 20;
 const CARD_COUNT = 5;
 const CARD_EXTRA_COUNT = 2;
 
@@ -28,13 +30,14 @@ const [filmsListElement, filmsTopRatedElement, filmsMostCommentedElement] = film
 
 render(filmsListElement, createLoadMoreButtonTemplate(), `afterend`);
 
-for (let i = 0; i < CARD_COUNT; i++) {
-  render(filmsListElement, createFilmCardTemplate());
-}
+const films = generateFilms(FILMS_COUNT);
+
+films.slice(0, CARD_COUNT)
+  .forEach((film) => render(filmsListElement, createFilmCardTemplate(film)));
 
 for (let i = 0; i < CARD_EXTRA_COUNT; i++) {
-  render(filmsTopRatedElement, createFilmCardTemplate());
-  render(filmsMostCommentedElement, createFilmCardTemplate());
+  render(filmsTopRatedElement, createFilmCardTemplate(films[i]));
+  render(filmsMostCommentedElement, createFilmCardTemplate(films[i]));
 }
 
 render(siteBodyElement, createFilmDetailTemplate());
