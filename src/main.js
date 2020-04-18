@@ -38,7 +38,7 @@ let showingFilmsCount = SHOWING_FILMS_COUNT_ON_START;
 films.slice(0, SHOWING_FILMS_COUNT_ON_START)
   .forEach((film) => render(filmsListElement, createFilmCardTemplate(film)));
 
-const loadMoreButton = filmsListElement.querySelector(`.films-list__show-more`);
+const loadMoreButton = siteMainElement.querySelector(`.films-list__show-more`);
 
 loadMoreButton.addEventListener(`click`, () => {
   const prevTasksCount = showingFilmsCount;
