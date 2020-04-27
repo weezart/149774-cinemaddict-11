@@ -1,10 +1,17 @@
 import {COMMENT_EMOTIONS} from "../const.js";
+import {createElement} from "../utils.js";
 
-export const createFilmDetailTemplate = (film) => {
+const createFilmDetailTemplate = (film) => {
   const {name, poster, rating, originalName, director, writers, actors, releaseDate, runtime, country, genres, description, ageRating, comments, isFavorite, isAtWatchlist, isWatched} = film;
 
+  const writersList = writers.join(`, `);
+  const actorsList = actors.join(`, `);
+  const releaseDateString = new Date(releaseDate).toLocaleDateString(
+      `en-GB`,
+      {day: `numeric`, month: `long`, year: `numeric`});
+
   return (
-    `<section class="film-details" style="display: none;">
+    `<section class="film-details">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">
@@ -36,15 +43,15 @@ export const createFilmDetailTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Writers</td>
-                  <td class="film-details__cell">${writers.join(`, `)}</td>
+                  <td class="film-details__cell">${writersList}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Actors</td>
-                  <td class="film-details__cell">${actors.join(`, `)}</td>
+                  <td class="film-details__cell">${actorsList}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${new Date(releaseDate).toLocaleDateString(`en-GB`, {day: `numeric`, month: `long`, year: `numeric`})}</td>
+                  <td class="film-details__cell">${releaseDateString}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
@@ -124,3 +131,26 @@ export const createFilmDetailTemplate = (film) => {
     </section>`
   );
 };
+
+export default class FilmDetail {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmDetailTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
