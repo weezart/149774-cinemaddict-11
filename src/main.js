@@ -27,13 +27,22 @@ const renderFilm = (container, film) => {
       return;
     }
     const filmDetail = new FilmDetailComponent(film);
-    const onPopupCloseClick = () => {
+    const onPopupClose = () => {
       filmDetail.getElement().remove();
       filmDetail.removeElement();
     };
 
-    filmDetail.getElement().querySelector(`button.film-details__close-btn`).addEventListener(`click`, onPopupCloseClick);
+    const onEscKeyDown = (evt) => {
+      const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
+      if (isEscKey) {
+        onPopupClose();
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      }
+    };
+
+    filmDetail.getElement().querySelector(`button.film-details__close-btn`).addEventListener(`click`, onPopupClose);
+    document.addEventListener(`keydown`, onEscKeyDown);
     render(siteBodyElement, filmDetail.getElement(), RenderPosition.BEFOREEND);
   };
 
